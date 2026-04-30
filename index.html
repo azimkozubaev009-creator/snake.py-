@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Snake Dashboard</title>
+    <style>
+        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; }
+        .container { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+        img { border: 3px solid #444; border-radius: 10px; background: #000; }
+        .stats { font-size: 20px; color: #00ff00; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>AI Snake Training: Rewards & Learning</h1>
+    <div class="stats" id="info">Waiting for data...</div>
+    <div class="container">
+        <div>
+            <h3>Game Stream</h3>
+            <img src="/video_feed" width="500">
+        </div>
+        <div>
+            <h3>Reward Graph</h3>
+            <img id="plot" src="/static/plot.png" width="500">
+        </div>
+    </div>
+    <script>
+        setInterval(() => {
+            document.getElementById('plot').src = "/static/plot.png?t=" + new Date().getTime();
+        }, 1000);
+    </script>
+</body>
+</html>
+<hr style="margin-top: 50px; border-color: #444;">
+<h2 style="color: white; text-align: center;">Результаты обученной модели (Архив)</h2>
+
+<div style="display: flex; justify-content: space-around; padding: 20px;">
+    <div style="text-align: center;">
+        <h3 style="color: #00ff00;">Финальный результат (Видео)</h3>
+        <video width="400" controls>
+            <source src="{{ url_for('static', filename='trained_snake.mp4') }}" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
+
+    <div style="text-align: center;">
+        <h3 style="color: #00ff00;">График обучения (Итог)</h3>
+        <img src="{{ url_for('static', filename='final_plot.png') }}" width="400" style="border-radius: 10px; border: 2px solid #555;">
+    </div>
+</div>
